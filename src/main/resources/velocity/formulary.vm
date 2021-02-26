@@ -77,7 +77,7 @@
 </form>
 <br>
 <script>
-    window.Mercadopago.setPublishableKey("TEST-bbd882b1-0970-43e8-8b7b-8bd1d15f4116");
+    window.Mercadopago.setPublishableKey("TEST-b95647e6-554a-46e8-b405-d975ce36d22c");
     window.Mercadopago.getIdentificationTypes();
 
     // SDK - obtener métodos de pago de la tarjeta
