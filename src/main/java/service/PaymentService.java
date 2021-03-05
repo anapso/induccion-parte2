@@ -23,7 +23,12 @@ public class PaymentService {
             String message = payment.getLastApiResponse() != null ?
                     JsonUtil.getParam(payment.getLastApiResponse().getStringResponse(), "message")
                     : ValidationUtil.INPUT_DATA_FAILED;
-            throw new ExercException(message, HttpStatus.BAD_REQUEST_400);
+
+            String error = payment.getLastApiResponse() != null ?
+                    JsonUtil.getParam(payment.getLastApiResponse().getStringResponse(), "error")
+                    : ValidationUtil.INPUT_DATA_FAILED;
+
+            throw new ExercException(message, error,  HttpStatus.BAD_REQUEST_400);
         }
 
         return payment;
