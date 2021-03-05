@@ -1,15 +1,16 @@
 package data;
 
-import java.util.List;
+import util.ValidationUtil;
 
 public class ExercException extends Exception{
 
     private Integer statusCode;
-    private List<String> errors;
+    private String error;
 
-    public ExercException(String message, Integer statusCode){
+    public ExercException(String message,  String error, Integer statusCode){
         super(message);
         this.statusCode = statusCode;
+        this.error = error;
     }
 
     public Integer getStatusCode() {
@@ -20,11 +21,28 @@ public class ExercException extends Exception{
         this.statusCode = statusCode;
     }
 
-    public List<String> getErrors() {
-        return errors;
+    public String getError() {
+        return error;
     }
 
-    public void setErrors(List<String> errors) {
-        this.errors = errors;
+    public void setError(String error) {
+        this.error = error;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder message = new StringBuilder();
+        message.append(super.toString());
+
+        if (ValidationUtil.hasValue(statusCode)){
+            message.append(" status_code: ");
+            message.append(statusCode);
+        }
+        if (ValidationUtil.hasValue(error)){
+            message.append(" errors: ");
+            message.append(String.join(", ", error));
+        }
+
+        return message.toString();
     }
 }

@@ -1,5 +1,6 @@
 package util;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import spark.ResponseTransformer;
 
@@ -30,10 +31,21 @@ public enum JsonUtil implements ResponseTransformer {
         return mapper.readTree(json).get(field).asText();
     }
 
+    public static <T> String errorDataToJson(T errorResponse){
+
+        try{
+            return mapper.writeValueAsString(errorResponse);
+        } catch (IOException e) {
+            return "{ " +
+                    "\"error\":\", " +
+                    "\"message\":\" " + e.getMessage() + " \" " +
+                    "}";
+        }
+    }
+
     // Render the model in a string with json format
     @Override
     public String render(Object model) throws IOException {
-
         return mapper.writeValueAsString(model);
     }
 
