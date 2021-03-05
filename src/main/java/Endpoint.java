@@ -14,7 +14,7 @@ public class Endpoint implements SparkApplication {
     @Override
     public void init() {
 
-        //Spark.secure(Constants.keystoreFile, Constants.keystorePassword, Constants.truststoreFile, Constants.truststorePassword);
+        Spark.secure(Constants.keystoreFile, Constants.keystorePassword, Constants.truststoreFile, Constants.truststorePassword);
 
         Spark.get(Path.Web.PROCESS_PAYMENT, PaymentController.getFormulary);
 
